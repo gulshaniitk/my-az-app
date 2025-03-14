@@ -14,6 +14,7 @@ namespace my_az_app.Pages
 
         public void OnGet()
         {
+            throw new Exception("Testing");
         }
     }
 
