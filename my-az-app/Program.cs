@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using my_az_app.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationInsightsTelemetry();
@@ -7,6 +10,10 @@ builder.Services.AddApplicationInsightsTelemetry(new Microsoft.ApplicationInsigh
 {
     ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 });
+
+var connectionString = builder.Configuration.GetConnectionString("AzureSqlConnection");
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
